@@ -91,18 +91,9 @@ local funstuffsearch = Instance.new("TextBox")
 local autofarmsearch = Instance.new("TextBox")
 local autobuysearch = Instance.new("TextBox")
 
-local Lock = Instance.new("TextButton")
-local Unlock = Instance.new("TextButton")
-local RPGLock = Instance.new("TextButton")
-local RPGUnlock = Instance.new("TextButton")
-local Autokillon = Instance.new("TextButton")
-local Autokilloff = Instance.new("TextButton")
 local View = Instance.new("TextButton")
 local Unview = Instance.new("TextButton")
 local Teleport = Instance.new("TextButton")
-local Bag = Instance.new("TextButton")
-local Info = Instance.new("TextButton")
-local Fling = Instance.new("TextButton")
 
 local credit1 = Instance.new("TextLabel")
 local credit2 = Instance.new("TextLabel")
@@ -209,43 +200,6 @@ Main.BorderColor3 = Color3.fromRGB(45, 45, 45)
 Main.BorderSizePixel = 6
 Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Visible = false
-
-
-local UIS = game:GetService('UserInputService')
-local frame = script.Parent.Main
-local dragToggle = nil
-local dragSpeed = 0.25
-local dragStart = nil
-local startPos = nil
-
-local function updateInput(input)
- local delta = input.Position - dragStart
- local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
-  startPos.Y.Scale, startPos.Y.Offset + delta.Y)
- game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
-end
-
-frame.InputBegan:Connect(function(input)
- if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
-  dragToggle = true
-  dragStart = input.Position
-  startPos = frame.Position
-  input.Changed:Connect(function()
-   if input.UserInputState == Enum.UserInputState.End then
-    dragToggle = false
-   end
-  end)
- end
-end)
-
-UIS.InputChanged:Connect(function(input)
- if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-  if dragToggle then
-   updateInput(input)
-  end
- end
-end)
-
 
 shadowHolder2.Name = "shadowHolder2"
 shadowHolder2.Parent = Main
@@ -775,7 +729,7 @@ TextBox.TextColor3 = Color3.fromRGB(126, 126, 126)
 TextBox.TextSize = 17.000
 	--/ Functions
 
-				function GetShortenedPlrFromName(name) -- uses string.sub to see if the typed in name fits and matches somewhere in the player's name, uncase sensitive. returns a table where the player is inside because of the all and others support
+				function GetShortenedPlrFromName(name) 
 					name = string.lower(tostring(name))
 
 					if not game:GetService("Players"):FindFirstChild("all") and name == "all" or game:GetService("Players"):FindFirstChild("all") and game:GetService("Players"):FindFirstChild("all").ClassName ~= "Player" and name == "all" then
@@ -792,245 +746,13 @@ TextBox.TextSize = 17.000
 					end
 
 					for i, v in pairs(game.Players:GetPlayers()) do
-						if string.lower(string.sub(v.Name, 1, #name)) == name then
+						if string.lower(string.sub(v.Name or v.DisplayName, 1, #name)) == name then
 							return {v}
 						end
 					end
 
 					return nil
 				end
-
-Lock.Name = "Lock"
-Lock.Parent = Target1
-Lock.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Lock.BorderColor3 = Color3.fromRGB(40, 40, 40)
-Lock.Size = UDim2.new(0, 285, 0, 34)
-Lock.Font = Enum.Font.GothamSemibold
-Lock.Text = "Lock"
-Lock.TextColor3 = Color3.fromRGB(126, 126, 126)
-Lock.TextSize = 16.000
-Lock.MouseButton1Click:connect(function()
-    	if GetShortenedPlrFromName(TextBox.Text) ~= nil then
-						for i, v in pairs(GetShortenedPlrFromName(TextBox.Text)) do
-							LockedPlayer = v
-							break
-						end
-					end
-end)    
-
-Unlock.Name = "Unlock"
-Unlock.Parent = Target1
-Unlock.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Unlock.BorderColor3 = Color3.fromRGB(40, 40, 40)
-Unlock.Size = UDim2.new(0, 285, 0, 34)
-Unlock.Font = Enum.Font.GothamSemibold
-Unlock.Text = "Unlock"
-Unlock.TextColor3 = Color3.fromRGB(126, 126, 126)
-Unlock.TextSize = 16.000
-Unlock.MouseButton1Click:connect(function()
-    	LockedPlayer = nil
-					if LocalPlayer ~= nil and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("RightHand") and LocalPlayer.Character:FindFirstChild("RightLowerArm") and LocalPlayer.Character:FindFirstChild("LeftHand") and LocalPlayer.Character:FindFirstChild("LeftLowerArm") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-						LocalPlayer.Character:FindFirstChild("RightHand").CFrame = LocalPlayer.Character:FindFirstChild("RightLowerArm").CFrame - LocalPlayer.Character:FindFirstChild("RightLowerArm").CFrame.UpVector * 0.25
-						LocalPlayer.Character:FindFirstChild("LeftHand").CFrame = LocalPlayer.Character:FindFirstChild("LeftLowerArm").CFrame - LocalPlayer.Character:FindFirstChild("LeftLowerArm").CFrame.UpVector * 0.25
-					end
-end)    
-
-				game:GetService("RunService").Heartbeat:Connect(function()
-					if LockedPlayer ~= nil and LockedPlayer.Character and LockedPlayer.Character:FindFirstChildOfClass("Humanoid") and LockedPlayer.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-						for i, v in pairs(LocalPlayer.Character:GetDescendants()) do
-							if v.ClassName == "Motor6D" and (v.Name == "RightWrist" or v.Name == "LeftWrist") then
-								v:Destroy()
-							end
-						end
-						if LocalPlayer ~= nil and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("RightHand") and LocalPlayer.Character:FindFirstChild("LeftHand") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-
-							if LockedPlayer.Character.PrimaryPart and not LockedPlayer.Character:FindFirstChild("HumanoidRootPart") then
-								LocalPlayer.Character.RightHand.CFrame = LockedPlayer.Character.PrimaryPart.CFrame
-								LocalPlayer.Character.LeftHand.CFrame = LockedPlayer.Character.PrimaryPart.CFrame
-							elseif LockedPlayer.Character:FindFirstChild("HumanoidRootPart") then
-								LocalPlayer.Character.RightHand.CFrame = LockedPlayer.Character.HumanoidRootPart.CFrame
-								LocalPlayer.Character.LeftHand.CFrame = LockedPlayer.Character.HumanoidRootPart.CFrame
-							end
-
-						end
-					end
-				end)
-RPGLock.Name = "RPGLock"
-RPGLock.Parent = Target1
-RPGLock.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-RPGLock.BorderColor3 = Color3.fromRGB(40, 40, 40)
-RPGLock.Size = UDim2.new(0, 285, 0, 34)
-RPGLock.Font = Enum.Font.GothamSemibold
-RPGLock.Text = "RPGLock"
-RPGLock.TextColor3 = Color3.fromRGB(126, 126, 126)
-RPGLock.TextSize = 16.000
-RPGLock.MouseButton1Click:connect(function()
-    				--rpglock
-				game:GetService"RunService".RenderStepped:Connect(function()
-					if _G.rocketlock0000000 == true then
-						local target = TextBox.Text --Put either the player name, or a variable containing the player name
-						if game.Workspace.Ignored:FindFirstChild("Launcher")then
-							local lol = game.Workspace.Ignored:FindFirstChild("Launcher")
-							if lol:FindFirstChildOfClass("BodyVelocity") then
-								wait()
-								lol.BodyVelocity:Destroy()
-							end
-
-							if lol:FindFirstChild("BodyVelocity") == nil then
-								lol.CFrame = CFrame.new(workspace.Players[target].Head.CFrame.X,workspace.Players[target].Head.CFrame.Y+6,workspace.Players[target].Head.CFrame.Z)
-							end
-
-						elseif game.Workspace.Ignored:FindFirstChild("Handle")then
-							local lol = game.Workspace.Ignored:FindFirstChild("Handle")
-
-							if lol:FindFirstChild("Pin") then
-								lol.CFrame = CFrame.new(workspace.Players[target].Head.CFrame.X,workspace.Players[target].Head.CFrame.Y+1,workspace.Players[target].Head.CFrame.Z)
-							end
-						end
-					end
-				end)
-    _G.rocketlock0000000 = true
-end)    
-
-RPGUnlock.Name = "RPGUnlock"
-RPGUnlock.Parent = Target1
-RPGUnlock.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-RPGUnlock.BorderColor3 = Color3.fromRGB(40, 40, 40)
-RPGUnlock.Size = UDim2.new(0, 285, 0, 34)
-RPGUnlock.Font = Enum.Font.GothamSemibold
-RPGUnlock.Text = "RPGUnlock"
-RPGUnlock.TextColor3 = Color3.fromRGB(126, 126, 126)
-RPGUnlock.TextSize = 16.000
-RPGUnlock.MouseButton1Click:connect(function()
-    _G.rocketlock0000000 = false
-end)    
-
-Autokillon.Name = "Autokillon"
-Autokillon.Parent = Target1
-Autokillon.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Autokillon.BorderColor3 = Color3.fromRGB(40, 40, 40)
-Autokillon.Size = UDim2.new(0, 285, 0, 34)
-Autokillon.Font = Enum.Font.GothamSemibold
-Autokillon.Text = "AutoKill [On]"
-Autokillon.TextColor3 = Color3.fromRGB(126, 126, 126)
-Autokillon.TextSize = 16.000
-Autokillon.MouseButton1Click:connect(function()
-    		game:GetService("RunService").Heartbeat:Connect(function()
-					local target = TextBox.Text
-					if locked ~= nil and locked.Character and locked.Character:FindFirstChildOfClass("Humanoid") and locked.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-						for i, v in pairs(LocalPlayer.Character:GetDescendants()) do
-							if v.ClassName == "Motor6D" and (v.Name == "RightWrist" or v.Name == "LeftWrist") then
-								v:Destroy()
-							end
-						end
-						if locked.Character.PrimaryPart and not locked.Character:FindFirstChild("HumanoidRootPart") then
-
-							LocalPlayer.Character.RightHand.CFrame = locked.Character.PrimaryPart.CFrame -- tp fist lock
-							LocalPlayer.Character.LeftHand.CFrame = locked.Character.PrimaryPart.CFrame -- tp fist lock
-
-							if game.Players[target].Character.BodyEffects['K.O'].Value == true then
-								repeat
-									locked = nil
-									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Players[target].BodyEffects.SpecialParts.Head.CFrame
-									game.ReplicatedStorage.MainEvent:FireServer("Stomp")
-									wait()
-									if GetShortenedPlrFromName(TextBox.Text) ~= nil then
-										for i, v in pairs(GetShortenedPlrFromName(TextBox.Text)) do
-											locked = v
-											game.Workspace.Camera.CameraSubject = game.Players[v.Name].Character.Humanoid
-											break
-										end
-									end
-								until game.Players[target].Character.BodyEffects['K.O'].Value == false
-							end
-
-							if game.Players[target].Character.BodyEffects['K.O'].Value == false then
-								local tool = game.Players.LocalPlayer.Character:FindFirstChild("Combat")
-								wait(0.5)
-								tool:Activate()
-							end
-							wait()
-							game.Workspace.Camera.CameraSubject = game.Players[target].Character.Humanoid
-
-						elseif locked.Character:FindFirstChild("HumanoidRootPart") then
-							LocalPlayer.Character.RightHand.CFrame = locked.Character.HumanoidRootPart.CFrame -- tp fist lock
-							LocalPlayer.Character.LeftHand.CFrame = locked.Character.HumanoidRootPart.CFrame -- tp fist lock
-
-							if game.Players[target].Character.BodyEffects['K.O'].Value == true then
-								repeat
-									locked = nil
-									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Players[target].BodyEffects.SpecialParts.Head.CFrame
-									game.ReplicatedStorage.MainEvent:FireServer("Stomp")
-									wait()
-									if GetShortenedPlrFromName(TextBox.Text) ~= nil then
-										for i, v in pairs(GetShortenedPlrFromName(TextBox.Text)) do
-											locked = v
-											game.Workspace.Camera.CameraSubject = game.Players[v.Name].Character.Humanoid
-											break
-										end
-									end
-								until game.Players[target].Character.BodyEffects['K.O'].Value == false
-							end
-
-							if game.Players[target].Character.BodyEffects['K.O'].Value == false then
-								local tool = game.Players.LocalPlayer.Character:FindFirstChild("Combat")
-								wait(0.5)
-								tool:Activate()
-							end
-							wait()
-							game.Workspace.Camera.CameraSubject = game.Players[target].Character.Humanoid
-
-						end
-					end
-				end)
-    if GetShortenedPlrFromName(TextBox.Text) ~= nil then
-						for i, v in pairs(GetShortenedPlrFromName(TextBox.Text)) do
-							locked = v
-							game.Workspace.Camera.CameraSubject = game.Players[v.Name].Character.Humanoid
-							break
-						end
-					end
-end)    
-
-Autokilloff.Name = "Autokilloff"
-Autokilloff.Parent = Target1
-Autokilloff.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Autokilloff.BorderColor3 = Color3.fromRGB(40, 40, 40)
-Autokilloff.Size = UDim2.new(0, 285, 0, 34)
-Autokilloff.Font = Enum.Font.GothamSemibold
-Autokilloff.Text = "AutoKill [Off]"
-Autokilloff.TextColor3 = Color3.fromRGB(126, 126, 126)
-Autokilloff.TextSize = 16.000
-Autokilloff.MouseButton1Click:connect(function()
-    	locked = nil
-					if LocalPlayer ~= nil and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("RightHand") and LocalPlayer.Character:FindFirstChild("RightLowerArm") and LocalPlayer.Character:FindFirstChild("LeftHand") and LocalPlayer.Character:FindFirstChild("LeftLowerArm") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-
-						game.Workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
-
-						LocalPlayer.Character:FindFirstChild("RightHand").CFrame = LocalPlayer.Character:FindFirstChild("RightLowerArm").CFrame - LocalPlayer.Character:FindFirstChild("RightLowerArm").CFrame.UpVector * 0.25
-						LocalPlayer.Character:FindFirstChild("LeftHand").CFrame = LocalPlayer.Character:FindFirstChild("LeftLowerArm").CFrame - LocalPlayer.Character:FindFirstChild("LeftLowerArm").CFrame.UpVector * 0.25
-					end
-					local localCharacter    = game:GetService("Players").LocalPlayer.Character;
-					local LeftFist          = localCharacter.LeftHand;
-					local RightFist         = localCharacter.RightHand;
-
-
-					local rightwrist  = Instance.new("Motor6D");
-					rightwrist.Name   = "RightWrist";
-					rightwrist.Parent = localCharacter.RightHand;
-					rightwrist.C0     = CFrame.new(1.18422506e-07, -0.5009287, -6.81715525e-18, 1, 0, 0, 0, 1, 0, 0, 0, 1);
-					rightwrist.C1     = CFrame.new(3.55267503e-07, 0.125045404, 5.92112528e-08, 1, 0, 0, 0, 1, 0, 0, 0, 1);
-					rightwrist.Part0  = localCharacter.RightLowerArm;
-					rightwrist.Part1  = localCharacter.RightHand;
-
-					local leftwrist   = Instance.new("Motor6D");
-					leftwrist.Name    = "LeftWrist";
-					leftwrist.Parent  = localCharacter.LeftHand;
-					leftwrist.C0      = CFrame.new(0.000475466368, -0.5009287, 7.59417072e-20, 1, 0, 0, 0, 1, 0, 0, 0, 1);
-					leftwrist.C1      = CFrame.new(0.000475821638, 0.125045404, 5.92112528e-08, 1, 0, 0, 0, 1, 0, 0, 0, 1);
-					leftwrist.Part0   = localCharacter.LeftLowerArm;
-					leftwrist.Part1   = localCharacter.LeftHand;
-end)  
 
 View.Name = "View"
 View.Parent = Target1
@@ -1042,9 +764,9 @@ View.Text = "View"
 View.TextColor3 = Color3.fromRGB(126, 126, 126)
 View.TextSize = 16.000
 View.MouseButton1Click:connect(function()
-    wait()
-					local TargetPlr = TextBox.Text;
-					game.Workspace.Camera.CameraSubject = game.Players[TargetPlr].Character.Humanoid;
+wait()
+	local TargetPlr = TextBox.Text;
+	game.Workspace.Camera.CameraSubject = game.Players[TargetPlr].Character.Humanoid;
 end)  
 
 Unview.Name = "Unview"
@@ -1074,191 +796,6 @@ Teleport.MouseButton1Click:connect(function()
    local TargetPlr = TextBox.Text;
    wait(.30)
    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[TargetPlr].Character.HumanoidRootPart.CFrame 
-end)  
-
-Bag.Name = "Bag"
-Bag.Parent = Target1
-Bag.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Bag.BorderColor3 = Color3.fromRGB(40, 40, 40)
-Bag.Size = UDim2.new(0, 285, 0, 34)
-Bag.Font = Enum.Font.GothamSemibold
-Bag.Text = "Bag"
-Bag.TextColor3 = Color3.fromRGB(126, 126, 126)
-Bag.TextSize = 16.000
-Bag.MouseButton1Click:connect(function()
-    local TargetPlr = TextBox.Text
-					function getRoot(char)
-						local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
-						return rootPart
-					end
-
-					if TargetPlr and game.Players[TargetPlr].Character.BodyEffects['K.O'].Value == false then
-						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Ignored.Shop['[BrownBag] - $25'].Head.CFrame
-						wait(.30)
-						fireclickdetector(game.Workspace.Ignored.Shop['[BrownBag] - $25'].ClickDetector)
-						game.Players.LocalPlayer.Backpack:WaitForChild("[BrownBag]").Parent = game.Players.LocalPlayer.Character
-						wait(.5)
-						repeat
-							pcall(function()
-								wait()
-								getRoot(game.Players[TargetPlr].Character).CFrame = getRoot(game.Players.LocalPlayer.Character).CFrame + Vector3.new(1,3,0)
-								game.Players.LocalPlayer.Character["[BrownBag]"]:Activate()
-							end)
-						until game.Players[TargetPlr].Character:FindFirstChild("Christmas_Sock")
-					elseif game.Players[TargetPlr].Character.BodyEffects['K.O'].Value == false then
-					end
-end)  
-
-Info.Name = "Info"
-Info.Parent = Target1
-Info.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Info.BorderColor3 = Color3.fromRGB(40, 40, 40)
-Info.Size = UDim2.new(0, 285, 0, 34)
-Info.Font = Enum.Font.GothamSemibold
-Info.Text = "Info"
-Info.TextColor3 = Color3.fromRGB(126, 126, 126)
-Info.TextSize = 16.000
-Info.MouseButton1Click:connect(function()
-    	game.StarterGui:SetCore("SendNotification", {Title = "Info", Text = "User Info, Press F9 and choose output]", Icon = "rbxassetid://505845268", Duration = 5, Button1 = "Okay"})
-					local bitch = {
-						163721789,
-						15427717,
-						201454243,
-						822999,
-						63794379,
-						17260230,
-						28357488,
-						93101606,
-						8195210,
-						89473551,
-						16917269,
-						85989579,
-						1553950697,
-						476537893,
-						155627580,
-						31163456,
-						7200829,
-						25717070,
-						201454243,
-						15427717,
-						63794379,
-						16138978,
-						60660789,
-						17260230,
-						16138978,
-						1161411094,
-						9125623,
-						11319153,
-						34758833,
-						194109750,
-						35616559,
-						1257271138,
-						28885841,
-						23558830,
-						25717070,
-
-
-					}
-					local TargetPlr = TextBox.Text;
-					print("Faded: " .. "Player Username: " .. TargetPlr )
-					print("Faded: " .. "Player Wanted: " .. game.Players[TargetPlr].DataFolder.Information.Wanted.Value )
-					print("Faded: " .. "Player Cash: " .. game.Players[TargetPlr].DataFolder.Currency.Value .. "$" )
-					print("Faded: " .. "Player Health: " .. game.Players[TargetPlr].Character.Humanoid.Health )
-					for l, c in pairs(game.Players:GetChildren()) do
-						for i, v in pairs(bitch) do
-							if c.UserId == v then
-								local Vanis = game.Players.LocalPlayer
-								if Vanis then
-									print("Faded: " .. "Player Admin: " .. " Yes, Admin" )
-								end
-							end
-						end
-					end
-					if game.Players[TargetPlr].Character.BodyEffects.Armor.Value == 100 then
-						print("Faded: " .. "Armor: " .. " Yes,Player Got Armor" )
-					else
-						if game.Players[TargetPlr].Character.BodyEffects.Armor.Value == 0 then
-							print("Faded: " .. "Armor: " .. " No,Player Not Got Armor" )
-						end
-					end
-					if game.Players[TargetPlr].Character.BodyEffects['K.O'].Value == true then
-						print("Faded: " .. "Player Status: " .. "Player Knocked" )
-					else
-						if game.Players[TargetPlr].Character.BodyEffects['K.O'].Value == false then
-							print("Faded: " .. "Player Status: " .. "Player Not Knock" )
-						end			
-						print("Faded: " .. "Crew:" .. game:GetService("Players")[TargetPlr].DataFolder.Information.Crew.Value)
-						if game:GetService("Players")[TargetPlr].DataFolder.Information.Crew.Value == "" then
-							print("Faded: " .. "Player Not In Any Crew")
-						end
-						print("Faded: " .. "Player Tools: ")
-						for i, v in pairs(game:GetService("Players")[TargetPlr].Backpack:GetDescendants()) do
-							if v:IsA("Tool") then
-								print(""..v.Name.."")
-							end
-						end
-					end
-end)  
-
-Fling.Name = "Fling"
-Fling.Parent = Target1
-Fling.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Fling.BorderColor3 = Color3.fromRGB(40, 40, 40)
-Fling.Size = UDim2.new(0, 285, 0, 34)
-Fling.Font = Enum.Font.GothamSemibold
-Fling.Text = "Fling"
-Fling.TextColor3 = Color3.fromRGB(126, 126, 126)
-Fling.TextSize = 16.000
-Fling.MouseButton1Click:connect(function()
-    	function Not(text, image, Title)
-						local cor = coroutine.wrap(function()
-						end)
-						cor()
-					end
-
-					fling = false
-					for i,v in pairs(game.Players:GetPlayers()) do 
-						local Party = Instance.new("Part",workspace)
-						Party.Name = "Real Shat"
-						Party.CanCollide = false
-						Party.Anchored = false
-						Party.Size = Vector3.new(0, 0, 0)
-						Party.Massless = true
-						local Weld = Instance.new("Weld",Party)
-						Weld.Part0 = Party
-						Weld.Part1 = game.Players.LocalPlayer.Character.HumanoidRootPart
-						HasDied = false
-						local bodyp    = Instance.new("BodyPosition",Party)
-						bodyp.D        = 0
-						bodyp.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-						bodyp.P = 15000
-						Not("Curently killing "..TextBox.Text, 145360599, "Fling System")
-						local Target = workspace.Players[TextBox.Text]
-
-						repeat
-							game:GetService("RunService").RenderStepped:Wait()
-							pcall(function()
-
-								if Target.BodyEffects["K.O"].Value == true then
-									HasDied = true
-								end
-								if Target.BodyEffects:FindFirstChild("K.O") == nil then
-									HasDied = true
-
-								end
-								if HasDied == false then
-									bodyp.Position = Target.PrimaryPart.Position
-								end
-							end)
-						until HasDied == true
-
-						Party:Destroy()
-						for i = 1, 10 do
-							game.Players.LocalPlayer.Character:MoveTo(Target.LowerTorso.Position)
-							wait(0.1)
-						end
-						break
-					end
 end)  
 
 Locations1.Name = "Locations1"
