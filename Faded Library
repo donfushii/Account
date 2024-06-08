@@ -98,6 +98,7 @@ local Teleport = Instance.new("TextButton")
 local credit1 = Instance.new("TextLabel")
 local credit2 = Instance.new("TextLabel")
 local credit3 = Instance.new("TextLabel")
+local credit4 = Instance.new("TextLabel")
 
 local Loader = Instance.new("Frame")
 local shadowHolder = Instance.new("Frame")
@@ -202,6 +203,8 @@ Main.BorderSizePixel = 6
 Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Visible = false
 
+-- [ SHADOWS ] --
+
 shadowHolder2.Name = "shadowHolder2"
 shadowHolder2.Parent = Main
 shadowHolder2.BackgroundTransparency = 1.000
@@ -251,6 +254,8 @@ ambientShadow2.ImageColor3 = Color3.fromRGB(0, 0, 0)
 ambientShadow2.ImageTransparency = 0.880
 ambientShadow2.ScaleType = Enum.ScaleType.Slice
 ambientShadow2.SliceCenter = Rect.new(10, 10, 118, 118)
+
+-- [ MAIN FRAME ] --
 
 Title.Name = "Title"
 Title.Parent = Main
@@ -308,6 +313,8 @@ minimize.TextSize = 35.000
 UICorner.CornerRadius = UDim.new(0, 7)
 UICorner.Parent = Title
 
+-- [ HOME ] --
+
 Home1.Name = "Home1"
 Home1.Parent = Main
 Home1.Active = true
@@ -363,6 +370,8 @@ cas.Text = "Thanks for using Imperium."
 cas.TextColor3 = Color3.fromRGB(126, 126, 126)
 cas.TextSize = 17.000
 
+-- [ SCROLL PAGES ] --
+
 Pages.Name = "Pages"
 Pages.Parent = Main
 Pages.Active = true
@@ -399,6 +408,8 @@ UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 5)
 
+-- [ SCROLL PAGES - HOME ] --
+
 Home.Name = "Home"
 Home.Parent = pagescroll
 Home.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -419,6 +430,8 @@ Home.MouseButton1Click:connect(function()
    FunStuff1.Visible = false
    Credits1.Visible = false
 end)    
+
+-- [ SCROLL PAGES - MAIN ] --
 
 Mainbtn.Name = "Mainbtn"
 Mainbtn.Parent = pagescroll
@@ -441,6 +454,8 @@ Mainbtn.MouseButton1Click:connect(function()
    Credits1.Visible = false
 end)    
 
+-- [ SCROLL PAGES - COMBAT ] --
+
 Combat.Name = "Combat"
 Combat.Parent = pagescroll
 Combat.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -461,6 +476,8 @@ Combat.MouseButton1Click:connect(function()
    FunStuff1.Visible = false
    Credits1.Visible = false
 end)     
+
+-- [ SCROLL PAGES - ANIMATIONS ] --
 
 Animations.Name = "Animations"
 Animations.Parent = pagescroll
@@ -483,6 +500,8 @@ Animations.MouseButton1Click:connect(function()
    Credits1.Visible = false
 end)    
 
+-- [ SCROLL PAGES - TARGET ] --
+
 Target.Name = "Target"
 Target.Parent = pagescroll
 Target.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -503,6 +522,8 @@ Target.MouseButton1Click:connect(function()
    FunStuff1.Visible = false
    Credits1.Visible = false
 end)    
+
+-- [ SCROLL PAGES - LOCATIONS ] --
 
 Locations.Name = "Locations"
 Locations.Parent = pagescroll
@@ -525,6 +546,8 @@ Locations.MouseButton1Click:connect(function()
    Credits1.Visible = false
 end)    
 
+-- [ SCROLL PAGES - FUNSTUFF ] --
+
 FunStuff.Name = "FunStuff"
 FunStuff.Parent = pagescroll
 FunStuff.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -546,6 +569,8 @@ FunStuff.MouseButton1Click:connect(function()
    Credits1.Visible = false
 end)     
 
+-- [ SCROLL PAGES - CREDITS ] --
+
 Credits.Name = "Credits"
 Credits.Parent = pagescroll
 Credits.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -566,6 +591,11 @@ Credits.MouseButton1Click:connect(function()
    FunStuff1.Visible = false
    Credits1.Visible = true
 end)    
+
+
+
+
+-- [ COMBAT PAGE ] --
 
 Combat1.Name = "Combat1"
 Combat1.Parent = Main
@@ -597,6 +627,8 @@ combatsearch.PlaceholderText = "Search"
 combatsearch.Text = ""
 combatsearch.TextColor3 = Color3.fromRGB(126, 126, 126)
 combatsearch.TextSize = 17.000
+
+-- [ MAIN PAGE ] --
 
 Main1.Name = "Main1"
 Main1.Parent = Main
@@ -648,6 +680,8 @@ end
 
 Main1.Changed:Connect(UpdateResults)
 
+-- [ ANIMATIONS PAGE ] --
+
 Animations1.Name = "Animations1"
 Animations1.Parent = Main
 Animations1.Active = true
@@ -698,6 +732,8 @@ end
 
 Animations1.Changed:Connect(UpdateResults)
 
+-- [ TARGET PAGE ] --
+
 Target1.Name = "Target1"
 Target1.Parent = Main
 Target1.Active = true
@@ -728,7 +764,6 @@ TextBox.PlaceholderText = "Name Here"
 TextBox.Text = ""
 TextBox.TextColor3 = Color3.fromRGB(126, 126, 126)
 TextBox.TextSize = 17.000
-	--/ Functions
 
 				function GetShortenedPlrFromName(name) 
 					name = string.lower(tostring(name))
@@ -755,6 +790,8 @@ TextBox.TextSize = 17.000
 					return nil
 				end
 
+
+--[[
 View.Name = "View"
 View.Parent = Target1
 View.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -798,6 +835,9 @@ Teleport.MouseButton1Click:connect(function()
    wait(.30)
    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[TargetPlr].Character.HumanoidRootPart.CFrame 
 end)  
+--]]
+
+-- [ LOCATIONS PAGE ] --
 
 Locations1.Name = "Locations1"
 Locations1.Parent = Main
@@ -849,6 +889,8 @@ end
 
 Locations1.Changed:Connect(UpdateResults)
 
+-- [ FUNSTUFF PAGE ] --
+
 FunStuff1.Name = "FunStuff1"
 FunStuff1.Parent = Main
 FunStuff1.Active = true
@@ -899,6 +941,8 @@ end
 
 FunStuff1.Changed:Connect(UpdateResults)
 
+-- [ CREDITS PAGE ] --
+
 Credits1.Name = "Credits1"
 Credits1.Parent = Main
 Credits1.Active = true
@@ -923,7 +967,7 @@ credit1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 credit1.BackgroundTransparency = 1.000
 credit1.Size = UDim2.new(0, 200, 0, 50)
 credit1.Font = Enum.Font.GothamSemibold
-credit1.Text = "@Donfushii   :   Owner"
+credit1.Text = "@donfushii   :   Owner"
 credit1.TextColor3 = Color3.fromRGB(126, 126, 126)
 credit1.TextSize = 20.000
 
@@ -933,7 +977,7 @@ credit2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 credit2.BackgroundTransparency = 1.000
 credit2.Size = UDim2.new(0, 200, 0, 50)
 credit2.Font = Enum.Font.GothamSemibold
-credit2.Text = "@Klv1   :   Ideas"
+credit2.Text = "@donfushii   :   Owner"
 credit2.TextColor3 = Color3.fromRGB(126, 126, 126)
 credit2.TextSize = 20.000
 
@@ -943,9 +987,24 @@ credit3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 credit3.BackgroundTransparency = 1.000
 credit3.Size = UDim2.new(0, 200, 0, 50)
 credit3.Font = Enum.Font.GothamSemibold
-credit3.Text = "@Nighter  :  Library"
+credit3.Text = "@donfushii   :   Owner"
 credit3.TextColor3 = Color3.fromRGB(126, 126, 126)
 credit3.TextSize = 20.000
+
+credit4.Name = "credit4"
+credit4.Parent = Credits1
+credit4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+credit4.BackgroundTransparency = 1.000
+credit4.Size = UDim2.new(0, 200, 0, 50)
+credit4.Font = Enum.Font.GothamSemibold
+credit4.Text = "@donfushii   :   Owner"
+credit4.TextColor3 = Color3.fromRGB(126, 126, 126)
+credit4.TextSize = 20.000
+
+
+
+
+-- [ LOADER ] --
 
 Loader.Name = "Loader"
 Loader.Parent = F
@@ -1361,37 +1420,41 @@ local Players = game:GetService("Players")
 
 
 
--- [ TAB #1 ] --
+-- [ TAB MAIN ] --
 
-CreateButton("ForceReset", Main1, function()
-    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+CreateButton("Test Button #1", Main1, function()
+    print("Imperium On Top #1")
+end);
+
+CreateButton("Test Button #2", Main1, function()
+    print("Imperium On Top #2")
+end);
+
+CreateButton("Test Button #3", Main1, function()
+    print("Imperium On Top #3")
 end);
 
 
 
 
--- [ TAB #2 ] --
+-- [ TAB COMBAT ] --
 
-CreateButton("NoRecoil", Combat1, function()
-    for i,v in pairs(game:GetService('Workspace'):GetChildren()) do
-					if v:IsA('Camera') then
-						v:Destroy()
-					end
-				end
-				local LocalPlayer = game:GetService('Players').LocalPlayer;
-				local newcam = Instance.new('Camera',game.Workspace)
-				game.Workspace.Camera.CameraSubject = LocalPlayer.Character.Humanoid;
-				newcam.Name = 'Camera'
-				newcam.CameraType = 'Custom'
-				newcam.CameraSubject = game:GetService('Workspace').Players:FindFirstChild(player.Name):FindFirstChild('Humanoid')
-				newcam.HeadLocked = true
-				newcam.HeadScale = 1
+CreateButton("Test Button #1", Combat1, function()
+    print("Imperium On Top #1")
+end);
+
+CreateButton("Test Button #2", Combat1, function()
+    print("Imperium On Top #2")
+end);
+
+CreateButton("Test Button #3", Combat1, function()
+    print("Imperium On Top #3")
 end);
 
 
 
 
--- [ TAB #3 ] --
+-- [ TAB ANIMATIONS ] --
 
 CreateButton("Zombie", Animations1, function()
     	local Animate = game.Players.LocalPlayer.Character.Animate
@@ -1574,112 +1637,33 @@ end);
 
 
 
--- [ TAB #4 ] --
+-- [ TAB LOCATIONS ] --
 
-CreateButton("Bank", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-485.668, 23.631, -285.169)
+CreateButton("Test Button #1", Locations1, function()
+    print("Imperium On Top #1")
 end);
-CreateButton("GunShop#1", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-582, 7.172, -739.015)
+
+CreateButton("Test Button #2", Locations1, function()
+    print("Imperium On Top #2")
 end);
-CreateButton("GunShop#2", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(475.022, 48.005, -603.737)
-end);
-CreateButton("FoodStore#1", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-333.492065, 23.6826477, -292.959625)
-end);
-CreateButton("FoodStore#2", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(301.780121, 49.2826538, -619.999634)
-end);
-CreateButton("Taco", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(546.946, 51.061, -493.325)
-end);
-CreateButton("Sewers", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(112.622, -26.212, -277.321)
-end);
-CreateButton("Park", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(360.966, 48.5, -522.987)
-end);
-CreateButton("Playground", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-186.082, 21.829, -763.115)
-end);
-CreateButton("SkatePark", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-825.686, 21.999, -549.293)
-end);
-CreateButton("Casino", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-879.277, 21.254, -190.199)
-end);
-CreateButton("Theatre", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1004.420, 21.254, -180.739)
-end);
-CreateButton("Furniture", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-491.367, 21.253, -131.165)
-end);
-CreateButton("High School", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-652, 22, 255)
-end);
-CreateButton("Trailor", Locations1, function()
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-950, -1, 470)
-end);
-CreateButton("SavePosition", Locations1, function()
-    _G.savedhumanoidpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-end);
-CreateButton("LoadPosition", Locations1, function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(_G.savedhumanoidpos)
+
+CreateButton("Test Button #3", Locations1, function()
+    print("Imperium On Top #3")
 end);
 
 
 
 
--- [ TAB #5 ] --
+-- [ TAB FUNSTUFF ] --
 
-CreateButton("PPBat", FunStuff1, function()
-    	local plr = game.Players.LocalPlayer
-				local savedbatpos = plr.Character.HumanoidRootPart.Position
-				plr.Character.HumanoidRootPart.CFrame = CFrame.new(380.932, 44.318, -284.746)
-				wait(.1)
-				fireclickdetector(game.Workspace.Ignored.Shop['[Bat] - $250'].ClickDetector)
-				fireclickdetector(game.Workspace.Ignored.Shop['[Bat] - $250'].ClickDetector)
-				plr.Character.HumanoidRootPart.CFrame = CFrame.new(savedbatpos)
-				plr.Character.HumanoidRootPart.CFrame = CFrame.new(savedbatpos)
-				wait(2.5)
-				pcall(function()
-					for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if v.Name == '[Bat]' then
-							v.Parent = game.Players.LocalPlayer.Character
-						end
-					end
-				end)
-				wait(.9)
-				local plr = game.Players.LocalPlayer
-				local pos = plr.Character.HumanoidRootPart.Position
-				if not game.Players.LocalPlayer.Character:FindFirstChild("[Bat]") then
-					plr.Character.HumanoidRootPart.CFrame = targetpos
-					local cd = game:GetService("Workspace").Ignored.Shop["[Bat] - $350"]:FindFirstChild("ClickDetector")
-					wait(.9)
-					fireclickdetector(cd)
-					wait(.4)
-					game.Players.LocalPlayer.Backpack:FindFirstChild("[Bat]").Parent = plr.Character
-					wait(.9)
-					fireclickdetector(cd)
-					wait(.4)
-					game.Players.LocalPlayer.Backpack:FindFirstChild("[Bat]").Parent = plr.Character
-					for i,v in pairs(plr.Character:GetChildren()) do
-						if v.Name == '[Bat]' then
-							v:GetChildren()[3]:Destroy()
-						end
-					end
-					local sd = plr.Character:FindFirstChild("[Bat]")
-					sd.Grip = CFrame.new(-2.4000001, -0.699999988, 0, 0, 1, -0, -1, 0, -0, 0, 0, 1)
-					sd.GripForward = Vector3.new(0, 0, -1)
-					sd.GripPos = Vector3.new(-2.4, -0.7, 0)
-					sd.GripUp = Vector3.new(1, 0, 0)
-					plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-				end
-				local sd = plr.Character:FindFirstChild("[Bat]")
-				sd.Grip = CFrame.new(-2.4000001, -0.699999988, 0, 0, 1, -0, -1, 0, -0, 0, 0, 1)
-				sd.GripForward = Vector3.new(0, -1, -0)
-				sd.GripPos = Vector3.new(1.2111, 1.11114, 1.8111)
-				sd.GripUp = Vector3.new(-500000, 404, 5000000)
-				plr.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+CreateButton("Test Button #1", FunStuff1, function()
+    print("Imperium On Top #1")
+end);
+
+CreateButton("Test Button #2", FunStuff1, function()
+    print("Imperium On Top #2")
+end);
+
+CreateButton("Test Button #3", FunStuff1, function()
+    print("Imperium On Top #3")
 end);
