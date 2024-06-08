@@ -97,6 +97,7 @@ local Teleport = Instance.new("TextButton")
 
 local credit1 = Instance.new("TextLabel")
 local credit2 = Instance.new("TextLabel")
+local credit3 = Instance.new("TextLabel")
 
 local Loader = Instance.new("Frame")
 local shadowHolder = Instance.new("Frame")
@@ -746,7 +747,7 @@ TextBox.TextSize = 17.000
 					end
 
 					for i, v in pairs(game.Players:GetPlayers()) do
-						if string.lower(string.sub(v.Name or v.DisplayName, 1, #name)) == name then
+						if string.lower(string.sub(v.Name, 1, #name)) == name then
 							return {v}
 						end
 					end
@@ -922,7 +923,7 @@ credit1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 credit1.BackgroundTransparency = 1.000
 credit1.Size = UDim2.new(0, 200, 0, 50)
 credit1.Font = Enum.Font.GothamSemibold
-credit1.Text = "Fushii - Scripting/Owner"
+credit1.Text = "@Donfushii   :   Owner"
 credit1.TextColor3 = Color3.fromRGB(126, 126, 126)
 credit1.TextSize = 20.000
 
@@ -932,9 +933,19 @@ credit2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 credit2.BackgroundTransparency = 1.000
 credit2.Size = UDim2.new(0, 200, 0, 50)
 credit2.Font = Enum.Font.GothamSemibold
-credit2.Text = "Nighter - Library"
+credit2.Text = "@Klv1   :   Ideas"
 credit2.TextColor3 = Color3.fromRGB(126, 126, 126)
 credit2.TextSize = 20.000
+
+credit3.Name = "credit3"
+credit3.Parent = Credits1
+credit3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+credit3.BackgroundTransparency = 1.000
+credit3.Size = UDim2.new(0, 200, 0, 50)
+credit3.Font = Enum.Font.GothamSemibold
+credit3.Text = "@Nighter  :  Library"
+credit3.TextColor3 = Color3.fromRGB(126, 126, 126)
+credit3.TextSize = 20.000
 
 Loader.Name = "Loader"
 Loader.Parent = F
@@ -1280,14 +1291,14 @@ fadedlod.TextSize = 25.000
 	    if Loader.Visible == true then
 	   print('wait')     
 	   else
-		if input.KeyCode == Enum.KeyCode.V and Loader.Visible == false then -- the button lol
+		if input.KeyCode == Enum.KeyCode.V and Loader.Visible == false then
 			if opened == true then
-				Main:TweenSize(UDim2.new(0, 439,0, 0), "InOut", "Linear", 0.2, true) -- small make sure the "Main" Frame change it to ur frame name and make sure ClipDesendants is enabled!
+				Main:TweenSize(UDim2.new(0, 439,0, 0), "InOut", "Linear", 0.2, true)
 				wait(0.2)
 				Main.Visible = false
 				opened = false
 			elseif opened == false then
-				Main:TweenSize(UDim2.new(0, 439,0, 284), "InOut", "Linear", 0.2, true) --original
+				Main:TweenSize(UDim2.new(0, 439,0, 284), "InOut", "Linear", 0.2, true)
 				wait()
 				Main.Visible = true
 				opened = true
@@ -1295,6 +1306,7 @@ fadedlod.TextSize = 25.000
 		end
 		end
 	end)
+
 	local UIS = game:GetService("UserInputService")
 	function dragify(Frame)
 		dragToggle = nil
