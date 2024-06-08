@@ -10,7 +10,7 @@ local DiamondId = {
 
 -- [ FRIENDS ] --
 local StarId = {
-	[0] = true,
+	[11111] = true,
 }
 
 
