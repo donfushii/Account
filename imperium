@@ -3173,9 +3173,7 @@ end)
 
 
 local swagmins = {
-  2499319655, -- fed
-  73060874, -- lucas
--- these are only for the owners, obviously you can remove these if you are reading this
+  5127756688,
 }
 
 local bending = false
