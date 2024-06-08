@@ -339,7 +339,7 @@ cas.BackgroundTransparency = 1.000
 cas.Position = UDim2.new(0.375438571, 0, 0.778260887, 0)
 cas.Size = UDim2.new(0, 69, 0, 29)
 cas.Font = Enum.Font.GothamSemibold
-cas.Text = "Cash: " .. game.Players.LocalPlayer.DataFolder.Currency.Value .. "$"
+cas.Text = "Cash: "
 cas.TextColor3 = Color3.fromRGB(126, 126, 126)
 cas.TextSize = 17.000
 
@@ -351,7 +351,7 @@ bon.BackgroundTransparency = 1.000
 bon.Position = UDim2.new(0.322807014, 0, 0.652173936, 0)
 bon.Size = UDim2.new(0, 100, 0, 29)
 bon.Font = Enum.Font.GothamSemibold
-bon.Text = "Bounty: " .. game.Players.LocalPlayer.DataFolder.Information.Wanted.Value
+bon.Text = "Bounty: "
 bon.TextColor3 = Color3.fromRGB(126, 126, 126)
 bon.TextSize = 17.000
 
