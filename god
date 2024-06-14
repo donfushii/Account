@@ -48,8 +48,6 @@ local SavedCheckpoint = nil
 
 -- [ FUNCTION'S ] --
 
-AntiRagdollFunction = false
-
 local function SendNotify(title, message, duration)
 	game:GetService("StarterGui"):SetCore("SendNotification", {Title = title, Text = message, Duration = duration;})
 end
@@ -332,14 +330,9 @@ MainTAB:Button("📍 ・ Potion Dick", function()
 	end
 end)
 
-MainTAB:Button("📍 ・ Chat Alert", function()
-	for i = 1,3 do
-		local args = {[1] = "\u{205F}",[2] = "All"}
-		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-	end
-end)
 
 ---- [ ] ----
+
 
 MainTAB:Toggle("📌 ・ Anti Ragdoll", false, function(bool)
 
@@ -382,7 +375,27 @@ MainTAB:Toggle("📌 ・ Void Protection", false, function(bool)
 
 end)
 
+MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
+ 
+	_G.FakeLag = bool
 
+	local LocalPlayer = game:GetService("Players").LocalPlayer
+	local Character = LocalPlayer.Character
+	local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+
+	if _G.FakeLag then
+	    task.spawn(function()
+	        while _G.FakeLag do
+	            for i,v in pairs(game.Players:GetChildren()) do
+	                HumanoidRootPart.Anchored = true
+	            wait(0.2)
+	                HumanoidRootPart.Anchored = false
+	            wait()
+            end
+	    end
+	end)
+
+end)
 
 
 
