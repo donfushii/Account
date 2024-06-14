@@ -382,31 +382,7 @@ MainTAB:Toggle("📌 ・ Void Protection", false, function(bool)
 
 end)
 
-MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
- 
-	if _G.FakeLag then
-	    task.spawn(function()
-	        while _G.FakeLag do
-	            for i,v in pairs(game.Players:GetChildren()) do
-	        local LocalPlayer = game:GetService("Players").LocalPlayer
-	        local Character = LocalPlayer.Character
-	        local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-	
-	        HumanoidRootPart.Anchored = true
-	            wait(0.2)
-	        local LocalPlayer = game:GetService("Players").LocalPlayer
-	        local Character = LocalPlayer.Character
-	        local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-	
-	        HumanoidRootPart.Anchored = false
-	            wait()
-            end
-	    end
-	end)
 
-	_G.FakeLag = bool
-
-end)
 
 
 
