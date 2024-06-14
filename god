@@ -379,11 +379,10 @@ MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
  
 	_G.FakeLag = bool
 
-	local LocalPlayer = game:GetService("Players").LocalPlayer
-	local Character = LocalPlayer.Character
-	local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+	local HumanoidRootPart = plr.Character:FindFirstChild("HumanoidRootPart")
 
 	if _G.FakeLag then
+	    task.spawn(function()
 	        while _G.FakeLag do
 	            for i,v in pairs(game.Players:GetChildren()) do
 	                HumanoidRootPart.Anchored = true
@@ -391,7 +390,9 @@ MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
 	                HumanoidRootPart.Anchored = false
 	            wait()
             end
-	end
+	    end
+	end)
+end
 
 end)
 
