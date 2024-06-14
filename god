@@ -48,6 +48,8 @@ local SavedCheckpoint = nil
 
 -- [ FUNCTION'S ] --
 
+AntiRagdollFunction = false
+
 local function SendNotify(title, message, duration)
 	game:GetService("StarterGui"):SetCore("SendNotification", {Title = title, Text = message, Duration = duration;})
 end
@@ -385,7 +387,7 @@ MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
 	if _G.FakeLag then
 	    task.spawn(function()
 	        while _G.FakeLag do
-	            for I, V in pairs(game.Players:GetChildren()) do
+	            for i,v in pairs(game.Players:GetChildren()) do
 	        local LocalPlayer = game:GetService("Players").LocalPlayer
 	        local Character = LocalPlayer.Character
 	        local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
@@ -401,7 +403,6 @@ MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
             end
 	    end
 	end)
-    end
 
 	_G.FakeLag = bool
 
