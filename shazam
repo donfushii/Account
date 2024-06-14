@@ -1,5 +1,5 @@
     	game:GetService("Players").LocalPlayer.Chatted:Connect(function(arg)
-					if arg == "Shazam!" then
+					if arg == "asd" then
 						repeat
 							wait();
 						local ReplicatedStorage = game:GetService('ReplicatedStorage');
