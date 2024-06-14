@@ -384,7 +384,6 @@ MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
 	local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
 
 	if _G.FakeLag then
-	    task.spawn(function()
 	        while _G.FakeLag do
 	            for i,v in pairs(game.Players:GetChildren()) do
 	                HumanoidRootPart.Anchored = true
@@ -392,8 +391,7 @@ MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
 	                HumanoidRootPart.Anchored = false
 	            wait()
             end
-	    end
-	end)
+	end
 
 end)
 
