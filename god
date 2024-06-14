@@ -401,6 +401,7 @@ MainTAB:Toggle("📌 ・ Fake Lag", false, function(bool)
             end
 	    end
 	end)
+    end
 
 	_G.FakeLag = bool
 
